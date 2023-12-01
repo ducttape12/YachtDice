@@ -1,0 +1,62 @@
+ <table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th *ngFor="let player of players" scope="col">{{player.name}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Ones</th>
+            <td *ngFor="let player of players">{{player.getOnesScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Twos</th>
+            <td *ngFor="let player of players">{{player.getTwosScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Threes</th>
+            <td *ngFor="let player of players">{{player.getThreesScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Fours</th>
+            <td *ngFor="let player of players">{{player.getFoursScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Fives</th>
+            <td *ngFor="let player of players">{{player.getFivesScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Sixes</th>
+            <td *ngFor="let player of players">{{player.getSixesScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Full House</th>
+            <td *ngFor="let player of players">{{player.getFullHouseScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Four Of A Kind</th>
+            <td *ngFor="let player of players">{{player.getFourOfAKindScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Little Straight</th>
+            <td *ngFor="let player of players">{{player.getLittleStraightScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Big Straight</th>
+            <td *ngFor="let player of players">{{player.getBigStraightScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Choice</th>
+            <td *ngFor="let player of players">{{player.getChoiceScore()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Yacht</th>
+            <td *ngFor="let player of players">{{player.getYachtScore()}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <th scope="row">Score</th>
+        <td *ngFor="let player of players">{{player.getTotalScore()}}</td>
+    </tfoot>
+</table>

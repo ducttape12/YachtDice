@@ -1,0 +1,4 @@
+<ng-container *ngIf="yachtGame !== undefined">
+    <app-player-turn [yachtGame]="yachtGame"></app-player-turn>
+    <app-score-card [players]="yachtGame.players"></app-score-card>
+</ng-container>
