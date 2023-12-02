@@ -1,9 +1,9 @@
 import { ScoringCategory } from "./scoring-category";
 
 export class Player {
-    private categoryScore:Map<ScoringCategory, number | null>;
+    categoryScore: Map<ScoringCategory, number | null>;
 
-    constructor(public name:string) {
+    constructor(public name: string) {
         this.categoryScore = new Map<ScoringCategory, number | null>();
         this.categoryScore.set(ScoringCategory.Ones, null);
         this.categoryScore.set(ScoringCategory.Twos, null);
@@ -19,69 +19,69 @@ export class Player {
         this.categoryScore.set(ScoringCategory.Yacht, null);
     }
 
-    private getScore(category:ScoringCategory):string {
-        const score = this.categoryScore.get(category)
+    private getScore(category: ScoringCategory): number | null {
+        const score = this.categoryScore.get(category);
 
-        if (score === null || score === undefined) {
-            return '';
-        } else {
-            return score?.toString();
+        if (score === undefined) {
+            throw RangeError(`Unknown category ${category}`);
         }
+
+        return score;
     }
 
-    getOnesScore():string {
+    getOnesScore(): number | null {
         return this.getScore(ScoringCategory.Ones);
     }
 
-    getTwosScore():string {
+    getTwosScore(): number | null {
         return this.getScore(ScoringCategory.Twos);
     }
 
-    getThreesScore():string {
+    getThreesScore(): number | null {
         return this.getScore(ScoringCategory.Threes);
     }
 
-    getFoursScore():string {
+    getFoursScore(): number | null {
         return this.getScore(ScoringCategory.Fours);
     }
 
-    getFivesScore():string {
+    getFivesScore(): number | null {
         return this.getScore(ScoringCategory.Fives);
     }
 
-    getSixesScore():string {
+    getSixesScore(): number | null {
         return this.getScore(ScoringCategory.Sixes);
     }
 
-    getFullHouseScore():string {
+    getFullHouseScore(): number | null {
         return this.getScore(ScoringCategory.FullHouse);
     }
 
-    getFourOfAKindScore():string {
+    getFourOfAKindScore(): number | null {
         return this.getScore(ScoringCategory.FourOfAKind);
     }
 
-    getLittleStraightScore():string {
+    getLittleStraightScore(): number | null {
         return this.getScore(ScoringCategory.LittleStraight);
     }
 
-    getBigStraightScore():string {
+    getBigStraightScore(): number | null {
         return this.getScore(ScoringCategory.BigStraight);
     }
 
-    getChoiceScore():string {
+    getChoiceScore(): number | null {
         return this.getScore(ScoringCategory.Choice);
     }
 
-    getYachtScore():string {
+    getYachtScore(): number | null {
         return this.getScore(ScoringCategory.Yacht);
     }
 
-    getTotalScore():number {
+    getTotalScore(): number {
         let total = 0;
-        
-        for(const [key, value] of this.categoryScore) {
-            if(value !== undefined && value !== null) {
+
+        for (const [key, value] of this.categoryScore) {
+            if (value !== undefined && value !== null) {
                 total += value;
             }
         }

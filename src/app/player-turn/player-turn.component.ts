@@ -13,6 +13,12 @@ import {
   bootstrapX
 } from '@ng-icons/bootstrap-icons';
 import { Die } from '../die';
+import { GameState } from '../game-state';
+
+const StateToDisplayDice = [
+  GameState.WaitingForSecondRoll,
+  GameState.WaitingForThirdRoll,
+  GameState.WaitingForFinalCategorySelection];
 
 @Component({
   selector: 'app-player-turn',
@@ -40,5 +46,21 @@ export class PlayerTurnComponent {
 
   toggleDieHold(die: Die) {
     die.held = !die.held;
+  }
+
+  playerCanRoll(): boolean {
+    if (this.yachtGame === undefined) {
+      return false;
+    }
+
+    return this.yachtGame?.playerCanRoll();
+  }
+
+  displayDice(): boolean {
+    if (this.yachtGame === undefined) {
+      return false;
+    }
+
+    return StateToDisplayDice.includes(this.yachtGame?.gameState);
   }
 }
