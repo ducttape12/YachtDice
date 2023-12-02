@@ -1,10 +1,8 @@
 export class Die {
     _value:number = 1;
+    held:boolean = false;
 
-    constructor(value:number) {
-        this.value = value;
-        this.held = false;
-    }
+    constructor() { }
 
     get value() {
         return this._value;
@@ -17,6 +15,4 @@ export class Die {
 
         this._value = value;
     }
-
-    held:boolean = false;
 }
