@@ -134,7 +134,7 @@ export class YachtGame {
             shallowDiceCopy[0].value === shallowDiceCopy[2].value &&
             shallowDiceCopy[3].value === shallowDiceCopy[4].value;
 
-        if(!firstThreeAndLastTwoEqual && !firstThreeAndLastTwoEqual) {
+        if(!firstTwoAndLastThreeEqual && !firstThreeAndLastTwoEqual) {
             return 0;
         }
 

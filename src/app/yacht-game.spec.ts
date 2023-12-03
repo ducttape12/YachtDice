@@ -74,6 +74,27 @@ describe('YachtGame', () => {
     expect(yachtGame.dice[4].value).toBe(1);
   });
 
-  // TODO: Check for 2 and 3 full house
-  // TODO: Check for 3 and 2 full house
+  it('should correctly score a full house when there are two low and three high', () => {
+    // Arrange
+    const yachtGame = new YachtGame(1);
+    yachtGame.dice = [new Die(5), new Die(2), new Die(5), new Die(5), new Die(2)];
+
+    // Act
+    const currentFullHouseScore = yachtGame.getCurrentFullHouseScore();
+
+    // Assert
+    expect(currentFullHouseScore).toBe(19);
+  });
+
+  it('should correctly score a full house when there are three low and two high', () => {
+    // Arrange
+    const yachtGame = new YachtGame(1);
+    yachtGame.dice = [new Die(5), new Die(2), new Die(2), new Die(5), new Die(2)];
+
+    // Act
+    const currentFullHouseScore = yachtGame.getCurrentFullHouseScore();
+
+    // Assert
+    expect(currentFullHouseScore).toBe(16);
+  });
 });
