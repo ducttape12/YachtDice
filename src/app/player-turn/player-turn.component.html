@@ -19,4 +19,83 @@
             Roll Dice
         </button>
     </div>
+
+    <ng-container *ngIf="displayScoring()">
+
+        <h2>Scoring</h2>
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Ones</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentOnesScore()}}">
+                <button *ngIf="yachtGame.getCurrentOnesScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordOnesScore()">Record Ones</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Twos</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentTwosScore()}}">
+                <button *ngIf="yachtGame.getCurrentTwosScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordTwosScore()">Record Twos</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Threes</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentThreesScore()}}">
+                <button *ngIf="yachtGame.getCurrentThreesScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordThreesScore()">Record Threes</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Fours</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentFoursScore()}}">
+                <button *ngIf="yachtGame.getCurrentFoursScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordFoursScore()">Record Fours</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Fives</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentFivesScore()}}">
+                <button *ngIf="yachtGame.getCurrentFivesScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordFivesScore()">Record Fives</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Sixes</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentSixesScore()}}">
+                <button *ngIf="yachtGame.getCurrentSixesScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordSixesScore()">Record Sixes</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Full House</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentFullHouseScore()}}">
+                <button *ngIf="yachtGame.getCurrentFullHouseScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordFullHouseScore()">Record Full House</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Four-Of-A-Kind</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentFourOfAKindScore()}}">
+                <button *ngIf="yachtGame.getCurrentFourOfAKindScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordFourOfAKind()">Record Four-Of-A-Kind</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Little Straight</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentLittleStraightScore()}}">
+                <button *ngIf="yachtGame.getCurrentLittleStraightScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordLittleStraightScore()">Record Little Straight</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Big Straight</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentBigStraightScore()}}">
+                <button *ngIf="yachtGame.getCurrentBigStraightScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordBigStraightScore()">Record Big Straight</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Choice</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentChoiceScore()}}">
+                <button *ngIf="yachtGame.getCurrentChoiceScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordChoiceScore()">Record Choice</button>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Yacht</span>
+                <input type="text" class="form-control" readonly value="{{yachtGame.getCurrentYachtScore()}}">
+                <button *ngIf="yachtGame.getCurrentYachtScore() !== null" class="btn btn-primary" type="button"
+                    id="button-addon2" (click)="yachtGame.recordYachtScore()">Record Yacht</button>
+            </div>
+        </div>
+    </ng-container>
 </ng-container>

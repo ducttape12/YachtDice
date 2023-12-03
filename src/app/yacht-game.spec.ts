@@ -34,7 +34,7 @@ describe('YachtGame', () => {
   it('should return null when the player has a recorded score', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.Ones, 1);
+    yachtGame.currentPlayer().onesScore = 1;
     yachtGame.dice = [new Die(2), new Die(1), new Die(3), new Die(1), new Die(5)];
 
     // Act
@@ -47,7 +47,7 @@ describe('YachtGame', () => {
   it('should return null when the player has a full house but already has a recorded full house score', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.FullHouse, 8);
+    yachtGame.currentPlayer().fullHouseScore = 8;
     yachtGame.dice = [new Die(5), new Die(2), new Die(5), new Die(5), new Die(2)];
 
     // Act
@@ -113,7 +113,7 @@ describe('YachtGame', () => {
   it('should return null when four of a kind has already been recorded', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.FourOfAKind, 4);
+    yachtGame.currentPlayer().fourOfAKindScore = 4;
     yachtGame.dice = [new Die(5), new Die(2), new Die(5), new Die(5), new Die(5)];
 
     // Act
@@ -162,7 +162,7 @@ describe('YachtGame', () => {
   it('should return null when already recorded a little straight', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.LittleStraight, 30);
+    yachtGame.currentPlayer().littleStraightScore = 30;
     yachtGame.dice = [new Die(5), new Die(2), new Die(1), new Die(4), new Die(3)];
 
     // Act
@@ -199,7 +199,7 @@ describe('YachtGame', () => {
   it('should return null when already recorded a big straight', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.BigStraight, 30);
+    yachtGame.currentPlayer().bigStraightScore = 30;
     yachtGame.dice = [new Die(5), new Die(2), new Die(6), new Die(4), new Die(3)];
 
     // Act
@@ -236,7 +236,7 @@ describe('YachtGame', () => {
   it('should return null when already recorded choice', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.Choice, 13);
+    yachtGame.currentPlayer().choiceScore = 13;
     yachtGame.dice = [new Die(5), new Die(2), new Die(6), new Die(4), new Die(3)];
 
     // Act
@@ -261,7 +261,7 @@ describe('YachtGame', () => {
   it('should return null when already recorded yacht', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
-    yachtGame.currentPlayer().categoryScore.set(ScoringCategory.Yacht, 50);
+    yachtGame.currentPlayer().yachtScore = 50;
     yachtGame.dice = [new Die(5), new Die(5), new Die(5), new Die(5), new Die(5)];
 
     // Act

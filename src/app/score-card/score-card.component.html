@@ -1,3 +1,4 @@
+ <h1>Score Card</h1>
  <table class="table">
     <thead>
         <tr>
@@ -8,51 +9,51 @@
     <tbody>
         <tr>
             <th scope="row">Ones</th>
-            <td *ngFor="let player of players">{{player.getOnesScore()}}</td>
+            <td *ngFor="let player of players">{{player.onesScore}}</td>
         </tr>
         <tr>
             <th scope="row">Twos</th>
-            <td *ngFor="let player of players">{{player.getTwosScore()}}</td>
+            <td *ngFor="let player of players">{{player.twosScore}}</td>
         </tr>
         <tr>
             <th scope="row">Threes</th>
-            <td *ngFor="let player of players">{{player.getThreesScore()}}</td>
+            <td *ngFor="let player of players">{{player.threesScore}}</td>
         </tr>
         <tr>
             <th scope="row">Fours</th>
-            <td *ngFor="let player of players">{{player.getFoursScore()}}</td>
+            <td *ngFor="let player of players">{{player.foursScore}}</td>
         </tr>
         <tr>
             <th scope="row">Fives</th>
-            <td *ngFor="let player of players">{{player.getFivesScore()}}</td>
+            <td *ngFor="let player of players">{{player.fivesScore}}</td>
         </tr>
         <tr>
             <th scope="row">Sixes</th>
-            <td *ngFor="let player of players">{{player.getSixesScore()}}</td>
+            <td *ngFor="let player of players">{{player.sixesScore}}</td>
         </tr>
         <tr>
             <th scope="row">Full House</th>
-            <td *ngFor="let player of players">{{player.getFullHouseScore()}}</td>
+            <td *ngFor="let player of players">{{player.fullHouseScore}}</td>
         </tr>
         <tr>
             <th scope="row">Four Of A Kind</th>
-            <td *ngFor="let player of players">{{player.getFourOfAKindScore()}}</td>
+            <td *ngFor="let player of players">{{player.fourOfAKindScore}}</td>
         </tr>
         <tr>
             <th scope="row">Little Straight</th>
-            <td *ngFor="let player of players">{{player.getLittleStraightScore()}}</td>
+            <td *ngFor="let player of players">{{player.littleStraightScore}}</td>
         </tr>
         <tr>
             <th scope="row">Big Straight</th>
-            <td *ngFor="let player of players">{{player.getBigStraightScore()}}</td>
+            <td *ngFor="let player of players">{{player.bigStraightScore}}</td>
         </tr>
         <tr>
             <th scope="row">Choice</th>
-            <td *ngFor="let player of players">{{player.getChoiceScore()}}</td>
+            <td *ngFor="let player of players">{{player.choiceScore}}</td>
         </tr>
         <tr>
             <th scope="row">Yacht</th>
-            <td *ngFor="let player of players">{{player.getYachtScore()}}</td>
+            <td *ngFor="let player of players">{{player.yachtScore}}</td>
         </tr>
     </tbody>
     <tfoot>

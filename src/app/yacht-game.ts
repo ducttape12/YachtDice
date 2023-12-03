@@ -30,6 +30,14 @@ export class YachtGame {
         return this.players[this.currentPlayerIndex];
     }
 
+    nextPlayer(): void {
+        this.currentPlayerIndex++;
+        if (this.currentPlayerIndex >= this.players.length) {
+            this.currentPlayerIndex = 0;
+        }
+        this.gameState = GameState.WaitingForFirstRoll;
+    }
+
     playerCanRoll(): boolean {
         const allDiceOnHold = this.dice.filter(d => d.held).length == this.dice.length;
 
@@ -83,27 +91,93 @@ export class YachtGame {
     }
 
     getCurrentOnesScore(): number | null {
-        return this.getCurrentValueScore(1, this.currentPlayer().getOnesScore());
+        return this.getCurrentValueScore(1, this.currentPlayer().onesScore);
+    }
+
+    recordOnesScore(): void {
+        const score = this.getCurrentOnesScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().onesScore = score;
+        this.nextPlayer();
     }
 
     getCurrentTwosScore(): number | null {
-        return this.getCurrentValueScore(2, this.currentPlayer().getTwosScore());
+        return this.getCurrentValueScore(2, this.currentPlayer().twosScore);
+    }
+
+    recordTwosScore(): void {
+        const score = this.getCurrentTwosScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().twosScore = score;
+        this.nextPlayer();
     }
 
     getCurrentThreesScore(): number | null {
-        return this.getCurrentValueScore(3, this.currentPlayer().getThreesScore());
+        return this.getCurrentValueScore(3, this.currentPlayer().threesScore);
+    }
+
+    recordThreesScore(): void {
+        const score = this.getCurrentThreesScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().threesScore = score;
+        this.nextPlayer();
     }
 
     getCurrentFoursScore(): number | null {
-        return this.getCurrentValueScore(4, this.currentPlayer().getFoursScore());
+        return this.getCurrentValueScore(4, this.currentPlayer().foursScore);
+    }
+
+    recordFoursScore(): void {
+        const score = this.getCurrentFoursScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().foursScore = score;
+        this.nextPlayer();
     }
 
     getCurrentFivesScore(): number | null {
-        return this.getCurrentValueScore(5, this.currentPlayer().getFivesScore());
+        return this.getCurrentValueScore(5, this.currentPlayer().fivesScore);
+    }
+
+    recordFivesScore(): void {
+        const score = this.getCurrentFivesScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().fivesScore = score;
+        this.nextPlayer();
     }
 
     getCurrentSixesScore(): number | null {
-        return this.getCurrentValueScore(6, this.currentPlayer().getSixesScore());
+        return this.getCurrentValueScore(6, this.currentPlayer().sixesScore);
+    }
+
+    recordSixesScore(): void {
+        const score = this.getCurrentSixesScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().sixesScore = score;
+        this.nextPlayer();
     }
 
     private shallowSortedDiceCopy(): Die[] {
@@ -123,7 +197,7 @@ export class YachtGame {
     }
 
     getCurrentFullHouseScore(): number | null {
-        const recordedFullHouseScore = this.currentPlayer().getFullHouseScore();
+        const recordedFullHouseScore = this.currentPlayer().fullHouseScore;
         if (recordedFullHouseScore !== null) {
             return null;
         }
@@ -148,8 +222,19 @@ export class YachtGame {
         return currentFullHouseScore;
     }
 
+    recordFullHouseScore(): void {
+        const score = this.getCurrentFullHouseScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().fullHouseScore = score;
+        this.nextPlayer();
+    }
+
     getCurrentFourOfAKindScore(): number | null {
-        const recordedFourOfAKind = this.currentPlayer().getFourOfAKindScore();
+        const recordedFourOfAKind = this.currentPlayer().fourOfAKindScore;
         if (recordedFourOfAKind !== null) {
             return null;
         }
@@ -172,8 +257,19 @@ export class YachtGame {
         }
     }
 
+    recordFourOfAKind(): void {
+        const score = this.getCurrentFourOfAKindScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().fourOfAKindScore = score;
+        this.nextPlayer();
+    }
+
     getCurrentLittleStraightScore(): number | null {
-        const recordedLittleStraight = this.currentPlayer().getLittleStraightScore();
+        const recordedLittleStraight = this.currentPlayer().littleStraightScore;
         if (recordedLittleStraight !== null) {
             return null;
         }
@@ -194,8 +290,19 @@ export class YachtGame {
         return 0;
     }
 
+    recordLittleStraightScore(): void {
+        const score = this.getCurrentLittleStraightScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().littleStraightScore = score;
+        this.nextPlayer();
+    }
+
     getCurrentBigStraightScore(): number | null {
-        const recordedBigStraight = this.currentPlayer().getBigStraightScore();
+        const recordedBigStraight = this.currentPlayer().bigStraightScore;
         if (recordedBigStraight !== null) {
             return null;
         }
@@ -216,8 +323,19 @@ export class YachtGame {
         return 0;
     }
 
+    recordBigStraightScore(): void {
+        const score = this.getCurrentBigStraightScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().bigStraightScore = score;
+        this.nextPlayer();
+    }
+
     getCurrentChoiceScore(): number | null {
-        const recordedChoiceScore = this.currentPlayer().getChoiceScore();
+        const recordedChoiceScore = this.currentPlayer().choiceScore;
         if (recordedChoiceScore !== null) {
             return null;
         }
@@ -225,8 +343,19 @@ export class YachtGame {
         return this.dice.reduce((acc, cur) => acc + cur.value, 0);
     }
 
+    recordChoiceScore(): void {
+        const score = this.getCurrentChoiceScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().choiceScore = score;
+        this.nextPlayer();
+    }
+
     getCurrentYachtScore(): number | null {
-        const recordedYachtScore = this.currentPlayer().getYachtScore();
+        const recordedYachtScore = this.currentPlayer().yachtScore;
         if (recordedYachtScore !== null) {
             return null;
         }
@@ -234,10 +363,21 @@ export class YachtGame {
         const firstDieValue = this.dice[0].value;
         const allDiceEqualValue = this.dice.filter(d => d.value === firstDieValue).length === this.dice.length;
 
-        if(allDiceEqualValue) {
+        if (allDiceEqualValue) {
             return 50;
         }
 
         return 0;
+    }
+
+    recordYachtScore(): void {
+        const score = this.getCurrentYachtScore();
+
+        if (score === null) {
+            return;
+        }
+
+        this.currentPlayer().yachtScore = score;
+        this.nextPlayer();
     }
 }

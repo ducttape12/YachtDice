@@ -18,7 +18,14 @@ import { GameState } from '../game-state';
 const StateToDisplayDice = [
   GameState.WaitingForSecondRoll,
   GameState.WaitingForThirdRoll,
-  GameState.WaitingForFinalCategorySelection];
+  GameState.WaitingForFinalCategorySelection
+];
+
+const StateToDisplayScoring = [
+  GameState.WaitingForSecondRoll,
+  GameState.WaitingForThirdRoll,
+  GameState.WaitingForFinalCategorySelection
+];
 
 @Component({
   selector: 'app-player-turn',
@@ -62,5 +69,13 @@ export class PlayerTurnComponent {
     }
 
     return StateToDisplayDice.includes(this.yachtGame?.gameState);
+  }
+
+  displayScoring(): boolean {
+    if (this.yachtGame === undefined) {
+      return false;
+    }
+
+    return StateToDisplayScoring.includes(this.yachtGame?.gameState);
   }
 }
