@@ -106,12 +106,7 @@ export class YachtGame {
         return this.getCurrentValueScore(6, this.currentPlayer().getSixesScore());
     }
 
-    getCurrentFullHouseScore(): number | null {
-        const recordedFullHouseScore = this.currentPlayer().getFullHouseScore();
-        if(recordedFullHouseScore !== null) {
-            return null;
-        }
-
+    private shallowSortedDiceCopy(): Die[] {
         const shallowDiceCopy = [...this.dice];
 
         shallowDiceCopy.sort((a, b) => {
@@ -124,21 +119,125 @@ export class YachtGame {
             }
         });
 
+        return shallowDiceCopy;
+    }
+
+    getCurrentFullHouseScore(): number | null {
+        const recordedFullHouseScore = this.currentPlayer().getFullHouseScore();
+        if (recordedFullHouseScore !== null) {
+            return null;
+        }
+
+        const shallowSortedDiceCopy = this.shallowSortedDiceCopy();
+
         const firstTwoAndLastThreeEqual =
-            shallowDiceCopy[0].value === shallowDiceCopy[1].value &&
-            shallowDiceCopy[2].value === shallowDiceCopy[3].value &&
-            shallowDiceCopy[2].value === shallowDiceCopy[4].value;
+            shallowSortedDiceCopy[0].value === shallowSortedDiceCopy[1].value &&
+            shallowSortedDiceCopy[2].value === shallowSortedDiceCopy[3].value &&
+            shallowSortedDiceCopy[2].value === shallowSortedDiceCopy[4].value;
 
         const firstThreeAndLastTwoEqual =
-            shallowDiceCopy[0].value === shallowDiceCopy[1].value &&
-            shallowDiceCopy[0].value === shallowDiceCopy[2].value &&
-            shallowDiceCopy[3].value === shallowDiceCopy[4].value;
+            shallowSortedDiceCopy[0].value === shallowSortedDiceCopy[1].value &&
+            shallowSortedDiceCopy[0].value === shallowSortedDiceCopy[2].value &&
+            shallowSortedDiceCopy[3].value === shallowSortedDiceCopy[4].value;
 
-        if(!firstTwoAndLastThreeEqual && !firstThreeAndLastTwoEqual) {
+        if (!firstTwoAndLastThreeEqual && !firstThreeAndLastTwoEqual) {
             return 0;
         }
 
         const currentFullHouseScore = this.dice.reduce((acc, cur) => acc + cur.value, 0);
         return currentFullHouseScore;
+    }
+
+    getCurrentFourOfAKindScore(): number | null {
+        const recordedFourOfAKind = this.currentPlayer().getFourOfAKindScore();
+        if (recordedFourOfAKind !== null) {
+            return null;
+        }
+
+        const shallowSortedDiceCopy = this.shallowSortedDiceCopy();
+
+        const lowestDieValue = shallowSortedDiceCopy[0].value;
+        const lowestMatchCount = shallowSortedDiceCopy
+            .filter(d => d.value === lowestDieValue).length;
+        const highestDieValue = shallowSortedDiceCopy[shallowSortedDiceCopy.length - 1].value;
+        const highestMatchCount = shallowSortedDiceCopy
+            .filter(d => d.value === highestDieValue).length;
+
+        if (lowestMatchCount === 4) {
+            return lowestDieValue * 4;
+        } else if (highestMatchCount === 4) {
+            return highestDieValue * 4;
+        } else {
+            return 0;
+        }
+    }
+
+    getCurrentLittleStraightScore(): number | null {
+        const recordedLittleStraight = this.currentPlayer().getLittleStraightScore();
+        if (recordedLittleStraight !== null) {
+            return null;
+        }
+
+        const shallowSortedDiceCopy = this.shallowSortedDiceCopy();
+
+        let inOrder = true;
+        for (let i = 0; i < shallowSortedDiceCopy.length; i++) {
+            if (shallowSortedDiceCopy[i].value !== i + 1) {
+                inOrder = false;
+            }
+        }
+
+        if (inOrder) {
+            return 30;
+        }
+
+        return 0;
+    }
+
+    getCurrentBigStraightScore(): number | null {
+        const recordedBigStraight = this.currentPlayer().getBigStraightScore();
+        if (recordedBigStraight !== null) {
+            return null;
+        }
+
+        const shallowSortedDiceCopy = this.shallowSortedDiceCopy();
+
+        let inOrder = true;
+        for (let i = 0; i < shallowSortedDiceCopy.length; i++) {
+            if (shallowSortedDiceCopy[i].value !== i + 2) {
+                inOrder = false;
+            }
+        }
+
+        if (inOrder) {
+            return 30;
+        }
+
+        return 0;
+    }
+
+    getCurrentChoiceScore(): number | null {
+        const recordedChoiceScore = this.currentPlayer().getChoiceScore();
+        if (recordedChoiceScore !== null) {
+            return null;
+        }
+
+        return this.dice.reduce((acc, cur) => acc + cur.value, 0);
+    }
+
+    getCurrentYachtScore(): number | null {
+        const recordedYachtScore = this.currentPlayer().getYachtScore();
+        if (recordedYachtScore !== null) {
+            return null;
+        }
+
+        const firstDieValue = this.dice[0].value;
+        const allDiceEqualValue = this.dice.filter(d => d.value === firstDieValue).length === this.dice.length;
+
+        if(allDiceEqualValue) {
+            return 50;
+        }
+
+        return 0;
     }
 }
