@@ -3,11 +3,12 @@ import { YachtGame } from '../yacht-game';
 import { CommonModule } from '@angular/common';
 import { ScoreCardComponent } from '../score-card/score-card.component';
 import { PlayerTurnComponent } from '../player-turn/player-turn.component';
+import { GameOverComponent } from '../game-over/game-over.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, ScoreCardComponent, PlayerTurnComponent],
+  imports: [CommonModule, ScoreCardComponent, PlayerTurnComponent, GameOverComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })

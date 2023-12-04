@@ -489,4 +489,116 @@ describe('YachtGame', () => {
     // Assert
     expect(yachtGame.currentPlayerIndex).toBe(0);
   });
+
+  it('should not report the game is over when at least one player\'s score card is unfilled', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.currentPlayer().onesScore = 0;
+    yachtGame.currentPlayer().twosScore = 0;
+    yachtGame.currentPlayer().threesScore = 0;
+    yachtGame.currentPlayer().foursScore = 0;
+    yachtGame.currentPlayer().fivesScore = 0;
+    yachtGame.currentPlayer().sixesScore = 0;
+    yachtGame.currentPlayer().fullHouseScore = 0;
+    yachtGame.currentPlayer().fourOfAKindScore = 0;
+    yachtGame.currentPlayer().littleStraightScore = 0;
+    yachtGame.currentPlayer().bigStraightScore = 0;
+    yachtGame.currentPlayer().choiceScore = 0;
+    yachtGame.currentPlayer().yachtScore = 0;
+
+    // Act
+    const gameOver = yachtGame.gameOver();
+
+    // Assert
+    expect(gameOver).toBeFalse();
+  });
+
+  it('should report the game is over when at all player\'s score cards are filled', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    for(let i = 0; i < yachtGame.players.length; i++) {
+      yachtGame.players[i].onesScore = 0;
+      yachtGame.players[i].twosScore = 0;
+      yachtGame.players[i].threesScore = 0;
+      yachtGame.players[i].foursScore = 0;
+      yachtGame.players[i].fivesScore = 0;
+      yachtGame.players[i].sixesScore = 0;
+      yachtGame.players[i].fullHouseScore = 0;
+      yachtGame.players[i].fourOfAKindScore = 0;
+      yachtGame.players[i].littleStraightScore = 0;
+      yachtGame.players[i].bigStraightScore = 0;
+      yachtGame.players[i].choiceScore = 0;
+      yachtGame.players[i].yachtScore = 0;
+    }
+
+    // Act
+    const gameOver = yachtGame.gameOver();
+
+    // Assert
+    expect(gameOver).toBeTrue();
+  });
+
+  it('should return an empty list if the game is not over and winning players is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+
+    // Act
+    const winningPlayers = yachtGame.winningPlayers();
+
+    // Assert
+    expect(winningPlayers.length).toBe(0);
+  });
+
+  it('should return the player with the higest score when the game is over and winning players is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    for(let i = 0; i < yachtGame.players.length; i++) {
+      yachtGame.players[i].onesScore = i;
+      yachtGame.players[i].twosScore = i;
+      yachtGame.players[i].threesScore = i;
+      yachtGame.players[i].foursScore = i;
+      yachtGame.players[i].fivesScore = i;
+      yachtGame.players[i].sixesScore = i;
+      yachtGame.players[i].fullHouseScore = i;
+      yachtGame.players[i].fourOfAKindScore = i;
+      yachtGame.players[i].littleStraightScore = i;
+      yachtGame.players[i].bigStraightScore = i;
+      yachtGame.players[i].choiceScore = i;
+      yachtGame.players[i].yachtScore = i;
+    }
+
+    // Act
+    const winningPlayers = yachtGame.winningPlayers();
+
+    // Assert
+    expect(winningPlayers.length).toBe(1);
+    expect(winningPlayers[0]).toBe(yachtGame.players[1]);
+  });
+
+  it('should return all players tied with the higest score when the game is over and winning players is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    for(let i = 0; i < yachtGame.players.length; i++) {
+      yachtGame.players[i].onesScore = 5;
+      yachtGame.players[i].twosScore = 5;
+      yachtGame.players[i].threesScore = 5;
+      yachtGame.players[i].foursScore = 5;
+      yachtGame.players[i].fivesScore = 5;
+      yachtGame.players[i].sixesScore = 5;
+      yachtGame.players[i].fullHouseScore = 5;
+      yachtGame.players[i].fourOfAKindScore = 5;
+      yachtGame.players[i].littleStraightScore = 5;
+      yachtGame.players[i].bigStraightScore = 5;
+      yachtGame.players[i].choiceScore = 5;
+      yachtGame.players[i].yachtScore = 5;
+    }
+
+    // Act
+    const winningPlayers = yachtGame.winningPlayers();
+
+    // Assert
+    expect(winningPlayers.length).toBe(2);
+    expect(winningPlayers[0]).toBe(yachtGame.players[0]);
+    expect(winningPlayers[1]).toBe(yachtGame.players[1]);
+  });
 });

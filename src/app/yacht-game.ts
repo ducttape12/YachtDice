@@ -67,6 +67,21 @@ export class YachtGame {
         this.progressState();
     }
 
+    gameOver(): boolean {
+        return this.players.filter(p => p.scoreCardFull()).length === this.players.length;
+    }
+
+    winningPlayers(): Player[] {
+        if (!this.gameOver()) {
+            return [];
+        }
+
+        const maxScore = this.players
+            .reduce((max, player) => max > player.getTotalScore() ? max : player.getTotalScore(), 0);
+
+        return this.players.filter(p => p.getTotalScore() === maxScore);
+    }
+
     private progressState() {
         switch (this.gameState) {
             case GameState.WaitingForFirstRoll:
@@ -91,7 +106,7 @@ export class YachtGame {
     }
 
     recordScore(score: number | null, recordScoreFn: (score: number) => void) {
-        if(score === null) {
+        if (score === null) {
             return;
         }
 
