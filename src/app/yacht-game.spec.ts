@@ -1,3 +1,4 @@
+import { Action } from 'rxjs/internal/scheduler/Action';
 import { Die } from './die';
 import { GameState } from './game-state';
 import { ScoringCategory } from './scoring-category';
@@ -42,6 +43,96 @@ describe('YachtGame', () => {
 
     // Assert
     expect(currentOnesScore).toBeNull();
+  });
+
+  it('should record the ones score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(5)];
+
+    // Act
+    yachtGame.recordOnesScore();
+
+    // Assert
+    expect(yachtGame.players[0].onesScore).toBe(1);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should record the twos score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(5)];
+
+    // Act
+    yachtGame.recordTwosScore();
+
+    // Assert
+    expect(yachtGame.players[0].twosScore).toBe(2);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should record the threes score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(5)];
+
+    // Act
+    yachtGame.recordThreesScore();
+
+    // Assert
+    expect(yachtGame.players[0].threesScore).toBe(3);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should record the fours score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(5)];
+
+    // Act
+    yachtGame.recordFoursScore();
+
+    // Assert
+    expect(yachtGame.players[0].foursScore).toBe(4);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should record the fives score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(5)];
+
+    // Act
+    yachtGame.recordFivesScore();
+
+    // Assert
+    expect(yachtGame.players[0].fivesScore).toBe(5);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should record the sixes score, move to the next player, and reset the state when record is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(1), new Die(2), new Die(3), new Die(4), new Die(6)];
+
+    // Act
+    yachtGame.recordSixesScore();
+
+    // Assert
+    expect(yachtGame.players[0].sixesScore).toBe(6);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
   });
 
   it('should return null when the player has a full house but already has a recorded full house score', () => {
@@ -110,6 +201,21 @@ describe('YachtGame', () => {
     expect(currentFullHouseScore).toBe(0);
   });
 
+  it('should record the score, increment the player, and reset the state when recording a full house', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(2), new Die(2), new Die(5), new Die(2)];
+
+    // Act
+    yachtGame.recordFullHouseScore();
+
+    // Assert
+    expect(yachtGame.players[0].fullHouseScore).toBe(16);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
   it('should return null when four of a kind has already been recorded', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
@@ -159,6 +265,21 @@ describe('YachtGame', () => {
     expect(currentFourOfAKindScore).toBe(0);
   });
 
+  it('should record the score, increment the player, and reset the state when recordFourOfAKind is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(2), new Die(5), new Die(5), new Die(5)];
+
+    // Act
+    yachtGame.recordFourOfAKind();
+
+    // Assert
+    expect(yachtGame.players[0].fourOfAKindScore).toBe(20);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
   it('should return null when already recorded a little straight', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
@@ -194,6 +315,21 @@ describe('YachtGame', () => {
 
     // Assert
     expect(currentScore).toBe(0);
+  });
+
+  it('should record the score, increment the player, and reset the state when recordLittleStraight is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(2), new Die(1), new Die(4), new Die(3)];
+
+    // Act
+    yachtGame.recordLittleStraightScore();
+
+    // Assert
+    expect(yachtGame.players[0].littleStraightScore).toBe(30);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
   });
 
   it('should return null when already recorded a big straight', () => {
@@ -233,6 +369,21 @@ describe('YachtGame', () => {
     expect(currentScore).toBe(0);
   });
 
+  it('should record the score, increment the player, and reset the state when recordBigStraight is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(6), new Die(2), new Die(4), new Die(3)];
+
+    // Act
+    yachtGame.recordBigStraightScore();
+
+    // Assert
+    expect(yachtGame.players[0].bigStraightScore).toBe(30);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
   it('should return null when already recorded choice', () => {
     // Arrange
     const yachtGame = new YachtGame(1);
@@ -256,6 +407,21 @@ describe('YachtGame', () => {
 
     // Assert
     expect(currentScore).toBe(17);
+  });
+
+  it('should record the score, increment the player, and reset the state when recordChoice is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(3), new Die(2), new Die(4), new Die(3)];
+
+    // Act
+    yachtGame.recordChoiceScore();
+
+    // Assert
+    expect(yachtGame.players[0].choiceScore).toBe(17);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
   });
 
   it('should return null when already recorded yacht', () => {
@@ -293,5 +459,34 @@ describe('YachtGame', () => {
 
     // Assert
     expect(currentScore).toBe(0);
+  });
+
+  it('should record the score, increment the player, and reset the state when recordYacht is called', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.dice = [new Die(5), new Die(5), new Die(5), new Die(5), new Die(5)];
+
+    // Act
+    yachtGame.recordYachtScore();
+
+    // Assert
+    expect(yachtGame.players[0].yachtScore).toBe(50);
+    expect(yachtGame.currentPlayerIndex).toBe(1);
+    expect(yachtGame.gameState).toBe(GameState.WaitingForFirstRoll);
+  });
+
+  it('should loop back to the first player when the last player makes a move', () => {
+    // Arrange
+    const yachtGame = new YachtGame(2);
+    yachtGame.rollDice();
+    yachtGame.recordOnesScore();
+    yachtGame.rollDice();
+
+    // Act
+    yachtGame.recordOnesScore();
+
+    // Assert
+    expect(yachtGame.currentPlayerIndex).toBe(0);
   });
 });

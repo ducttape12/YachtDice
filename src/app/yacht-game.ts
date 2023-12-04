@@ -90,19 +90,21 @@ export class YachtGame {
         return recordedScore === null ? currentScore : null;
     }
 
+    recordScore(score: number | null, recordScoreFn: (score: number) => void) {
+        if(score === null) {
+            return;
+        }
+
+        recordScoreFn(score);
+        this.nextPlayer();
+    }
+
     getCurrentOnesScore(): number | null {
         return this.getCurrentValueScore(1, this.currentPlayer().onesScore);
     }
 
     recordOnesScore(): void {
-        const score = this.getCurrentOnesScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().onesScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentOnesScore(), (score) => this.currentPlayer().onesScore = score);
     }
 
     getCurrentTwosScore(): number | null {
@@ -110,14 +112,7 @@ export class YachtGame {
     }
 
     recordTwosScore(): void {
-        const score = this.getCurrentTwosScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().twosScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentTwosScore(), (score) => this.currentPlayer().twosScore = score);
     }
 
     getCurrentThreesScore(): number | null {
@@ -125,14 +120,7 @@ export class YachtGame {
     }
 
     recordThreesScore(): void {
-        const score = this.getCurrentThreesScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().threesScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentThreesScore(), (score) => this.currentPlayer().threesScore = score);
     }
 
     getCurrentFoursScore(): number | null {
@@ -140,14 +128,7 @@ export class YachtGame {
     }
 
     recordFoursScore(): void {
-        const score = this.getCurrentFoursScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().foursScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentFoursScore(), (score) => this.currentPlayer().foursScore = score);
     }
 
     getCurrentFivesScore(): number | null {
@@ -155,14 +136,7 @@ export class YachtGame {
     }
 
     recordFivesScore(): void {
-        const score = this.getCurrentFivesScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().fivesScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentFivesScore(), (score) => this.currentPlayer().fivesScore = score);
     }
 
     getCurrentSixesScore(): number | null {
@@ -170,14 +144,7 @@ export class YachtGame {
     }
 
     recordSixesScore(): void {
-        const score = this.getCurrentSixesScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().sixesScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentSixesScore(), (score) => this.currentPlayer().sixesScore = score);
     }
 
     private shallowSortedDiceCopy(): Die[] {
@@ -223,14 +190,7 @@ export class YachtGame {
     }
 
     recordFullHouseScore(): void {
-        const score = this.getCurrentFullHouseScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().fullHouseScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentFullHouseScore(), (score) => this.currentPlayer().fullHouseScore = score);
     }
 
     getCurrentFourOfAKindScore(): number | null {
@@ -258,14 +218,7 @@ export class YachtGame {
     }
 
     recordFourOfAKind(): void {
-        const score = this.getCurrentFourOfAKindScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().fourOfAKindScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentFourOfAKindScore(), (score) => this.currentPlayer().fourOfAKindScore = score);
     }
 
     getCurrentLittleStraightScore(): number | null {
@@ -291,14 +244,7 @@ export class YachtGame {
     }
 
     recordLittleStraightScore(): void {
-        const score = this.getCurrentLittleStraightScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().littleStraightScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentLittleStraightScore(), (score) => this.currentPlayer().littleStraightScore = score);
     }
 
     getCurrentBigStraightScore(): number | null {
@@ -324,14 +270,7 @@ export class YachtGame {
     }
 
     recordBigStraightScore(): void {
-        const score = this.getCurrentBigStraightScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().bigStraightScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentBigStraightScore(), (score) => this.currentPlayer().bigStraightScore = score);
     }
 
     getCurrentChoiceScore(): number | null {
@@ -344,14 +283,7 @@ export class YachtGame {
     }
 
     recordChoiceScore(): void {
-        const score = this.getCurrentChoiceScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().choiceScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentChoiceScore(), (score) => this.currentPlayer().choiceScore = score);
     }
 
     getCurrentYachtScore(): number | null {
@@ -371,13 +303,6 @@ export class YachtGame {
     }
 
     recordYachtScore(): void {
-        const score = this.getCurrentYachtScore();
-
-        if (score === null) {
-            return;
-        }
-
-        this.currentPlayer().yachtScore = score;
-        this.nextPlayer();
+        this.recordScore(this.getCurrentYachtScore(), (score) => this.currentPlayer().yachtScore = score);
     }
 }
