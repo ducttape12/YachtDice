@@ -1,19 +1,18 @@
 <ng-container *ngIf="yachtGame !== undefined && yachtGame.dice !== undefined">
     <h1>{{yachtGame.currentPlayer().name}}'s Turn</h1>
-    <div class="text-center">
-        <div class="row" *ngIf="displayDice()">
-            <div *ngFor="let die of yachtGame.dice; index as i" class="col-2">
-                <button type="button" class="btn"
-                    [ngClass]="{'active': die.held, 'btn-outline-secondary': !die.held, 'btn-outline-success': die.held}"
-                    (click)="toggleDieHold(die)">
-                    <p class="h2"><ng-icon name="bootstrapDice{{die.value}}Fill"></ng-icon></p>
+    <div class="row row-cols-3 row-cols-sm-5 justify-content-center" *ngIf="displayDice()">
+        <div *ngFor="let die of yachtGame.dice; index as i" class="col mb-3 d-grid gap-2">
+            <button type="button" class="btn btn-lg"
+                [ngClass]="{'active': die.held, 'btn-outline-secondary': !die.held, 'btn-outline-success': die.held}"
+                (click)="toggleDieHold(die)">
+                <p class="h2"><ng-icon name="bootstrapDice{{die.value}}Fill"></ng-icon></p>
 
-                    <span *ngIf="!die.held"><ng-icon name="bootstrapX"></ng-icon> Not Held</span>
-                    <span *ngIf="die.held"><ng-icon name="bootstrapCheck"></ng-icon> Held</span>
-                </button>
-            </div>
+                <span *ngIf="!die.held"><ng-icon name="bootstrapX"></ng-icon> Hold?</span>
+                <span *ngIf="die.held"><ng-icon name="bootstrapCheck"></ng-icon> Held</span>
+            </button>
         </div>
-
+    </div>
+    <div class="text-center">
         <button type="button" class="btn btn-primary" disabled="{{yachtGame.playerCanRoll() ? '' : 'disabled'}}"
             (click)="rollDice()">
             Roll Dice
