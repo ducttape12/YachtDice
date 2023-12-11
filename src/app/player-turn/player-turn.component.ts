@@ -47,6 +47,69 @@ const StateToDisplayScoring = [
 export class PlayerTurnComponent {
   @Input() yachtGame: YachtGame | undefined;
 
+  scoringCategories = [
+    {
+      label: 'Ones',
+      value: () => this.yachtGame?.getCurrentOnesScore(),
+      click: () => this.yachtGame?.recordOnesScore()
+    },
+    {
+      label: 'Twos',
+      value: () => this.yachtGame?.getCurrentTwosScore(),
+      click: () => this.yachtGame?.recordTwosScore()
+    },
+    {
+      label: 'Threes',
+      value: () => this.yachtGame?.getCurrentThreesScore(),
+      click: () => this.yachtGame?.recordThreesScore()
+    },
+    {
+      label: 'Fours',
+      value: () => this.yachtGame?.getCurrentFoursScore(),
+      click: () => this.yachtGame?.recordFoursScore()
+    },
+    {
+      label: 'Fives',
+      value: () => this.yachtGame?.getCurrentFivesScore(),
+      click: () => this.yachtGame?.recordFivesScore()
+    },
+    {
+      label: 'Sixes',
+      value: () => this.yachtGame?.getCurrentSixesScore(),
+      click: () => this.yachtGame?.recordSixesScore()
+    },
+    {
+      label: 'Full House',
+      value: () => this.yachtGame?.getCurrentFullHouseScore(),
+      click: () => this.yachtGame?.recordFullHouseScore()
+    },
+    {
+      label: 'Four-Of-A-Kind',
+      value: () => this.yachtGame?.getCurrentFourOfAKindScore(),
+      click: () => this.yachtGame?.recordFourOfAKind()
+    },
+    {
+      label: 'Little Straight',
+      value: () => this.yachtGame?.getCurrentLittleStraightScore(),
+      click: () => this.yachtGame?.recordLittleStraightScore()
+    },
+    {
+      label: 'Big Straight',
+      value: () => this.yachtGame?.getCurrentBigStraightScore(),
+      click: () => this.yachtGame?.recordBigStraightScore()
+    },
+    {
+      label: 'Choice',
+      value: () => this.yachtGame?.getCurrentChoiceScore(),
+      click: () => this.yachtGame?.recordChoiceScore()
+    },
+    {
+      label: 'Yacht',
+      value: () => this.yachtGame?.getCurrentYachtScore(),
+      click: () => this.yachtGame?.recordYachtScore()
+    },
+  ];
+
   rollDice() {
     this.yachtGame?.rollDice();
   }

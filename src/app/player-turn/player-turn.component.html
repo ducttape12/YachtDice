@@ -3,7 +3,7 @@
     <div class="row row-cols-3 row-cols-sm-5 justify-content-center" *ngIf="displayDice()">
         <div *ngFor="let die of yachtGame.dice; index as i" class="col mb-3 d-grid gap-2">
             <button type="button" class="btn btn-lg"
-                [ngClass]="{'active': die.held, 'btn-outline-secondary': !die.held, 'btn-outline-success': die.held}"
+                [ngClass]="{'active': die.held, 'btn-secondary': !die.held, 'btn-success': die.held}"
                 (click)="toggleDieHold(die)">
                 <p class="h2"><ng-icon name="bootstrapDice{{die.value}}Fill"></ng-icon></p>
 
@@ -12,7 +12,7 @@
             </button>
         </div>
     </div>
-    <div class="text-center">
+    <div class="d-grid gap-2 text-center">
         <button type="button" class="btn btn-primary" disabled="{{yachtGame.playerCanRoll() ? '' : 'disabled'}}"
             (click)="rollDice()">
             Roll Dice
@@ -21,7 +21,19 @@
 
     <ng-container *ngIf="displayScoring()">
 
-        <h2>Scoring</h2>
+        <h2>{{yachtGame.currentPlayer().name}}'s Score Card</h2>
+        <div *ngFor="let score of scoringCategories" class="row mb-1">
+            <label for="inputEmail3" class="col-4 col-form-label">{{score.label}}</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <input type="email" class="form-control text-end" id="inputEmail3" readonly
+                        value="{{score.value()}}">
+                    <button *ngIf="score.value() !== null" class="btn btn-primary" type="button"
+                        id="button-addon2" (click)="score.click()">Record Score</button>
+                </div>
+            </div>
+        </div>
+
         <div class="mb-3">
             <div class="input-group">
                 <span class="input-group-text">Ones</span>
