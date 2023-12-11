@@ -102,7 +102,7 @@ export class YachtGame {
     getCurrentValueScore(value: number, recordedScore: number | null): number | null {
         const currentScore = this.dice.filter(d => d.value === value).length * value;
 
-        return recordedScore === null ? currentScore : null;
+        return recordedScore === null ? currentScore : recordedScore;
     }
 
     recordScore(score: number | null, recordScoreFn: (score: number) => void) {
